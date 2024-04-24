@@ -10,7 +10,7 @@ $premierCompte = new Compte("Compte courant", 10, "EUR", $geoffroy);
 $deuxiemeCompte = new Compte("Compte épargne", 0, "EUR", $geoffroy);
 
 
-var_dump($geoffroy);
+// var_dump($geoffroy);
 
 echo $premierCompte->crediterCompte(25);
 echo $premierCompte->debiterCompte(5);
