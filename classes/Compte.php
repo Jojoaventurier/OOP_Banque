@@ -98,6 +98,13 @@ class Compte {
         
     }
 
+    public function infosCompte() {
+        return "Infos du ". $this->libelle ." :<br>
+        Titulaire : ". $this->titulaire."<br>
+        Date de naissance : ". $this->titulaire->getDateOfBirth() . "<br>
+        Solde = ". $this->getSolde(). "€<br>";
+    }
+
 
     public function toString() {
         return $this->libelle." ";

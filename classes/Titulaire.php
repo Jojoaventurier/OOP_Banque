@@ -44,7 +44,7 @@ class Titulaire {
 
     public function getDateOfBirth()
     {
-        return $this->dateOfBirth;
+        return $this->dateOfBirth->format("d.m.Y");
     }
 
     public function setDateOfBirth($dateOfBirth)
@@ -78,11 +78,35 @@ class Titulaire {
         return $this;
     }
 
+    public function afficherAge() {
+
+            $dateOfBirth = $this->dateOfBirth;
+            $today = new DateTime();
+            $diff = $today->diff($dateOfBirth);
+    
+             return  $diff->format('%Y') . " ans<br>" ;
+    }
+    
+
     public function ajouterCompte(Compte $compte) {
         $this->comptes[] = $compte;
+    }
+
+    public function infosTitulaire() {
+        $result = "Infos de ". $this. ": <br>
+        Date de naissance : ". $this->afficherAge().
+        "Liste des comptes :<br>";
+
+        foreach($this->comptes as $compte) {
+            $result .=  $compte->getLibelle() . " = " . $compte->getSolde(). "€ <br>";
+        }
+
+        return $result;
     }
 
     public function __toString() {
         return $this->prenom . " " . $this->nom;
     }
 }
+
+// fonction pour convertir date de naissance en âge àintégrer à infosTitulaire

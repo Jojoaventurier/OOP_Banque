@@ -16,3 +16,7 @@ echo $premierCompte->crediterCompte(25);
 echo $premierCompte->debiterCompte(5);
 
 echo $premierCompte->transfertArgent(12, $deuxiemeCompte);
+
+echo $geoffroy->infosTitulaire();
+
+echo $premierCompte->infosCompte();
