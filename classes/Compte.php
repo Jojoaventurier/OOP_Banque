@@ -14,6 +14,7 @@ class Compte {
         $this->solde = $solde;
         $this->devise = $devise;
         $this->titulaire = $titulaire;
+        $titulaire->ajouterCompte($this); 
     }
 
     public function getLibelle()
@@ -64,7 +65,7 @@ class Compte {
         return $this;
     }
 
-    public function __toString() {
-        
-    }
+    
+
+// ajouter une toString !!
 }
