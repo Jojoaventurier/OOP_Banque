@@ -4,12 +4,12 @@
 class Compte {
 
     private string $libelle;
-    private float $solde;
+    private int $solde;
     private string $devise;
     private Titulaire $titulaire;
 
 
-    public function __construct(string $libelle, float $solde, string $devise, Titulaire $titulaire) {
+    public function __construct(string $libelle, int $solde, string $devise, Titulaire $titulaire) {
         $this->libelle = $libelle;
         $this->solde = $solde;
         $this->devise = $devise;
@@ -26,7 +26,7 @@ class Compte {
     {
         $this->libelle = $libelle;
 
-        return $this;
+        return $this->libelle;
     }
 
     public function getSolde()
@@ -38,8 +38,8 @@ class Compte {
     {
         $this->solde = $solde;
 
-        return $this;
-    }
+        return $this->solde;
+    }   
 
     public function getDevise()
     {
@@ -65,7 +65,41 @@ class Compte {
         return $this;
     }
 
-    
+    public function crediterCompte($montant) {
+            if ($montant > 0) {
+            $this->solde += $montant;
+            return $montant. "€ ont été crédités sur le " . $this->libelle . " de ". $this->titulaire . "<br> 
+            Solde total du ". $this->libelle .": " .$this->getSolde() . "€<br>";
+        } else {
+            return "ERREUR - MONTANT NEGATIF";
+        }
+    }
 
-// ajouter une toString !!
+    public function debiterCompte($montant) {
+        if ($montant > 0 && $this->solde - $montant >= 0) {
+            $this->solde -= $montant;
+            return $montant. "€ ont été débités du ". $this->libelle. "  de ". $this->titulaire . "<br> Solde total du ". $this->libelle. ": " .$this->getSolde() . "€<br>";
+        } else if ($this->solde < $montant) {
+            return "ERREUR - MONTANT DU DEBIT SOUHAITE SUPERIEUR AU SOLDE DE VOTRE COMPTE";
+        } else if ($montant <= 0) {
+            return "ERREUR - MONTANT NEGATIF";
+        }
+    }
+
+    public function transfertArgent($montant, Compte $compteCredite) {
+        
+            $this->debiterCompte($montant);
+            $compteCredite->crediterCompte($montant);
+
+        return $montant. "€ ont été transférés du " . $this->libelle ." vers le " .$compteCredite->libelle. ". <br>
+                Comptes de ".$this->titulaire.": <br>
+                **********************************<br>".
+                $this->libelle. " = " .$this->getSolde() . "€ // ".$compteCredite->libelle. " = " . $compteCredite->getSolde() . "€<br>";
+        
+    }
+
+
+    public function toString() {
+        return $this->libelle." ";
+    }
 }

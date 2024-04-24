@@ -14,7 +14,7 @@ class Titulaire {
         $this->prenom = $prenom;
         $this->dateOfBirth = new DateTime($dateOfBirth);
         $this->ville = $ville;
-        $this->$comptes = [];
+        $this->comptes = [];
 
     }
 
@@ -83,6 +83,6 @@ class Titulaire {
     }
 
     public function __toString() {
-        return $this->prenom . " " . $this->nom . " ";
+        return $this->prenom . " " . $this->nom;
     }
 }
